@@ -5,11 +5,9 @@ function generateXMLFromMetrics(data) {
 
   for (var metric in data.metrics) {
     if (data.metrics[metric]['values']['p(90)']) {
-      try {
-        junitMetric.push(
-          '<testcase classname="K6TestMetrics" name="' + metric + ' P(90)' + '" time="' + data.metrics[metric]['values']['p(90)']/1000 + '"/>'
-        )
-      } catch(err) { }
+      junitMetric.push(
+        '<testcase classname="K6TestMetrics" name="' + metric + ' P(90)' + '" time="' + data.metrics[metric]['values']['p(90)']/1000 + '"/>'
+      )
     }
   }
 
