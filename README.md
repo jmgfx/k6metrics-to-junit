@@ -3,9 +3,11 @@ Generate an XML file containing K6 test metrics, publishable to Azure DevOps Tes
 
 # How to use
 1. Import the library
+2. 
 ```import {MetricsToJunit} from "https://raw.githubusercontent.com/jmgfx/k6metrics-to-junit/main/k6metrics-to-junit.js"```
 
 2. Add the following to the return statement of your handleSummary() function
+3. 
 ```'k6metrics.xml': MetricsToJunit(data)```
 
 3. That's it!
