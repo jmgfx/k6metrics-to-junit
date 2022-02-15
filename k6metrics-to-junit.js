@@ -1,6 +1,4 @@
 function generateXMLFromMetrics(data) {
-  const junitHeader = '<?xml version="1.0"?><testsuites name="' + "k6 Metrics" + '"><testsuite>\n';
-  const junitFooter = '\n</testsuite></testsuites>';
   var junitMetric = [];
 
   for (var metric in data.metrics) {
@@ -11,9 +9,10 @@ function generateXMLFromMetrics(data) {
     }
   }
 
-  const junitSelf = junitHeader + junitMetric.join('\n') + junitFooter;
-
-  return junitSelf;
+  return '<?xml version="1.0"?><testsuites><testsuite name="'
+      + 'k6 Metrics' + '">\n'
+      + junitMetric.join('\n')
+      + '\n</testsuite></testsuites>';
 }
 
-exports.K6MetricsToJunit = generateXMLFromMetrics
+exports.MetricsToJunit = generateXMLFromMetrics
