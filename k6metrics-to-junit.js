@@ -1,5 +1,6 @@
-function generateXMLFromMetrics(data) {
+function generateXMLFromMetrics(data, options) {
   var junitMetric = [];
+  var name = options && options.name ? options.name : 'k6 metrics'
 
   for (var metric in data.metrics) {
     if (data.metrics[metric]['values']['p(90)']) {
@@ -10,7 +11,7 @@ function generateXMLFromMetrics(data) {
   }
 
   return '<?xml version="1.0"?><testsuites><testsuite name="'
-      + 'k6 Metrics' + '">\n'
+      + name + '">\n'
       + junitMetric.join('\n')
       + '\n</testsuite></testsuites>';
 }
