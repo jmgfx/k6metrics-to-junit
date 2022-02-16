@@ -8,9 +8,9 @@ function generateXMLFromMetrics(data, options) {
     if (data.metrics[metric]['values']['p(90)']) {
       if (metric.includes('http_req_duration')) {
         httpReqDuration.push(
-          '<testsuite name="' + metric + '">'
+          '<testsuites><testsuite name="' + metric + '">'
           + '<testcase classname="' + metric + '" name="' + metric + ' ' + value + '" time="' + data.metrics[metric]['values'][value]/1000 + '"/>'
-          + '</testsuite>'
+          + '</testsuite></testsuites>'
         )
       } else {
         junitMetric.push(
@@ -20,12 +20,11 @@ function generateXMLFromMetrics(data, options) {
     }
   }
 
-  return '<?xml version="1.0"?><testsuites>'
+  return '<?xml version="1.0"?>\n'
         + httpReqDuration.join('\n')
-        + '<testsuite name="' + name + '">'
+        + '\n<testsuites><testsuite name="' + name + '">\n'
         + junitMetric.join('\n')
-        + '</testsuite>'
-        + '\n</testsuites>';
+        + '</testsuite></testsuites>';
 }
 
 exports.MetricsToJunit = generateXMLFromMetrics
